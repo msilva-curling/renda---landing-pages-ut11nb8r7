@@ -1,11 +1,30 @@
-/* Home Page - Replace this page layout, components, content, behavior with what you want and translate to the language of the user */
+import { useOutletContext } from 'react-router-dom'
+import { HeroSection } from './index/HeroSection'
+import { FeaturesSection } from './index/FeaturesSection'
+import { HowItWorksSection } from './index/HowItWorksSection'
+import { TestimonialsSection } from './index/TestimonialsSection'
+import { PricingSection } from './index/PricingSection'
+import { CtaSection } from './index/CtaSection'
+
+type OutletContextType = {
+  openModal: (view: 'login' | 'register' | 'demo') => void
+}
+
 const Index = () => {
+  const { openModal } = useOutletContext<OutletContextType>()
+
   return (
-    <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">
-        This is a example page ready to be rewritten with your own content
-      </h1>
-    </div>
+    <>
+      <HeroSection
+        onRegisterClick={() => openModal('register')}
+        onDemoClick={() => openModal('demo')}
+      />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <PricingSection onRegisterClick={() => openModal('register')} />
+      <CtaSection onRegisterClick={() => openModal('register')} />
+    </>
   )
 }
 
